@@ -13,17 +13,28 @@ namespace catalogo_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AccesoDatos datos = new AccesoDatos();
+            ArticuloNegocio negocio = new ArticuloNegocio();
 
             try
             {
-                datos.setearConsulta("select codigo, nombre, Descripcion, Precio from ARTICULOS");
-                datos.ejecutarLectura();
+                gvArticulos.DataSource = negocio.listar();
+                gvArticulos.DataBind();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FormularioArticulo.aspx", false);
+        }
+
+        protected void gvArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gvArticulos.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioArticulo.aspx?id=" + id, false);
         }
     }
 }
