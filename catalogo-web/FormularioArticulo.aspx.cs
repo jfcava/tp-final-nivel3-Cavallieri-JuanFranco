@@ -16,21 +16,24 @@ namespace catalogo_web
         {
             try
             {
-                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-                MarcaNegocio marcaNegocio = new MarcaNegocio();
-                
-                ddlCategoria.DataSource = categoriaNegocio.listar();
-                ddlCategoria.DataTextField = "Descripcion";
-                ddlCategoria.DataValueField = "Id";
-                ddlCategoria.DataBind();
+                if (!IsPostBack)
+                {
+                    CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                    MarcaNegocio marcaNegocio = new MarcaNegocio();
 
-                ddlMarca.DataSource = marcaNegocio.listar();
-                ddlMarca.DataTextField = "Descripcion";
-                ddlMarca.DataValueField = "Id";
-                ddlMarca.DataBind();
+                    ddlCategoria.DataSource = categoriaNegocio.listar();
+                    ddlCategoria.DataTextField = "Descripcion";
+                    ddlCategoria.DataValueField = "Id";
+                    ddlCategoria.DataBind();
+
+                    ddlMarca.DataSource = marcaNegocio.listar();
+                    ddlMarca.DataTextField = "Descripcion";
+                    ddlMarca.DataValueField = "Id";
+                    ddlMarca.DataBind();
+                }
 
 
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["id"] != null && !IsPostBack)
                 {
                     string id = Request.QueryString["id"].ToString();
                     ArticuloNegocio negocio = new ArticuloNegocio();
@@ -62,6 +65,43 @@ namespace catalogo_web
         protected void txtUrlImagen_TextChanged(object sender, EventArgs e)
         {
             imgArticulo.ImageUrl = txtUrlImagen.Text;
+        }
+
+        protected void txtAceptar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Articulo nuevo = new Articulo();
+                ArticuloNegocio negocio = new ArticuloNegocio();
+
+                nuevo.Codigo = txtCodigo.Text;
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Descripcion = txtDescripcion.Text;
+
+                nuevo.Marca = new Marca();
+                nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
+
+                nuevo.Categoria = new Categoria();
+                nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+
+                nuevo.Precio = decimal.Parse(txtPrecio.Text);
+                nuevo.ImagenUrl = txtUrlImagen.Text;
+
+                if (Request.QueryString["id"] == null)                
+                    negocio.agregar(nuevo);                
+                else
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    negocio.modificar(nuevo);
+                }
+
+                Response.Redirect("GestionArticulos.aspx", false);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

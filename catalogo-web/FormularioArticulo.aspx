@@ -7,7 +7,16 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <h1 style="padding-top: 20px">Detalle Artículo</h1>
+                <%if (Request.QueryString["id"] == null)
+                    {
+
+                %>
+                <h1 style="padding-top: 20px">Agregar Artículo</h1>
+                <%}
+                    else
+                    {  %>
+                <h1 style="padding-top: 20px">Modificar Artículo</h1>
+                <%} %>
                 <hr />
             </div>
             <div class="col-2"></div>
@@ -35,7 +44,7 @@
                     <label class="form-label">Marca</label>
                     <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
-                <asp:Button ID="txtAceptar" runat="server" Text="Aceptar" CssClass="btn btn-primary" />
+                <asp:Button ID="txtAceptar" runat="server" Text="Aceptar" CssClass="btn btn-primary" OnClick="txtAceptar_Click"/>
                 <a href="GestionArticulos.aspx">Cancelar</a>
             </div>
             <div class="col">
@@ -48,7 +57,7 @@
                     <asp:TextBox runat="server" CssClass="form-control" ID="txtPrecio" />
                 </div>
                 <div class="mb-3">
-                    <asp:Image ID="imgArticulo" runat="server" ImageUrl="https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg" Width="80%" />
+                    <asp:Image ID="imgArticulo" runat="server" ImageUrl="https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg" Width="50%" />
                 </div>
             </div>
             <div class="col-2"></div>

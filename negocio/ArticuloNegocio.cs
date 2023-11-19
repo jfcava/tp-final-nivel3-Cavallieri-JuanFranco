@@ -62,45 +62,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public List<Articulo> listarConSP()
-        {
-            AccesoDatos datos = new AccesoDatos();
-            List<Articulo> lista = new List<Articulo>();
-
-            try
-            {
-                datos.setearProcedimiento("listarSP");
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
-                {
-                    Articulo aux = new Articulo();
-                    aux.Id = (int)datos.Lector["Id"];
-                    aux.Codigo = (string)datos.Lector["Codigo"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Marca = new Marca();
-                    aux.Marca.Id = (int)datos.Lector["idMarca"];
-                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
-                    aux.Categoria = new Categoria();
-                    aux.Categoria.Id = (int)datos.Lector["idCategoria"];
-                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
-
-                    lista.Add(aux);
-                }
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+        
         public void agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -128,33 +90,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public void agregarConSP(Articulo nuevo)
-        {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-                datos.setearProcedimiento("agregarSP");
-                datos.setearParametros("@codigo", nuevo.Codigo);
-                datos.setearParametros("@nombre", nuevo.Nombre);
-                datos.setearParametros("descripcion", nuevo.Descripcion);
-                datos.setearParametros("idMarca", nuevo.Marca.Id);
-                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
-                datos.setearParametros("@urlImagen", nuevo.ImagenUrl);
-                datos.setearParametros("@precio", nuevo.Precio);
-
-                datos.ejecutarEscritura();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+        
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -202,33 +138,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public void modificarSP(Articulo nuevo)
-        {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-                datos.setearProcedimiento("modificarSP");
-                datos.setearParametros("@codigo", nuevo.Codigo);
-                datos.setearParametros("@nombre", nuevo.Nombre);
-                datos.setearParametros("@descripcion", nuevo.Descripcion);
-                datos.setearParametros("@idMarca", nuevo.Marca.Id);
-                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
-                datos.setearParametros("@imagenUrl", nuevo.ImagenUrl);
-                datos.setearParametros("@precio", nuevo.Precio);
-                datos.setearParametros("@id", nuevo.Id);
-
-                datos.ejecutarEscritura();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+        
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             AccesoDatos datos = new AccesoDatos();
