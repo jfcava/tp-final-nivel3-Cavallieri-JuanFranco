@@ -11,9 +11,10 @@ namespace catalogo_web
 {
     public partial class DetalleArticulo : System.Web.UI.Page
     {
+        public bool confirmaEliminar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
-
         {
+            confirmaEliminar = false;
             try
             {
                 if (!IsPostBack)
@@ -67,7 +68,7 @@ namespace catalogo_web
             imgArticulo.ImageUrl = txtUrlImagen.Text;
         }
 
-        protected void txtAceptar_Click(object sender, EventArgs e)
+        protected void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -101,6 +102,31 @@ namespace catalogo_web
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            confirmaEliminar = true;
+        }
+
+        protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        {
+            if (ckbConfirmaEliminar.Checked)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                int id = int.Parse(Request.QueryString["id"]);
+
+                try
+                {
+                    negocio.eliminar(id);
+                    Response.Redirect("GestionArticulos.aspx", false);
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", ex);
+                    Response.Redirect("Error.aspx", false);
+                }
             }
         }
     }

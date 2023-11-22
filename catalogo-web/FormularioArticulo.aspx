@@ -16,7 +16,7 @@
                     else
                     {  %>
                 <h1 style="padding-top: 20px">Modificar Artículo</h1>
-                <%} %>
+                <%}%>
                 <hr />
             </div>
             <div class="col-2"></div>
@@ -44,8 +44,20 @@
                     <label class="form-label">Marca</label>
                     <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
-                <asp:Button ID="txtAceptar" runat="server" Text="Aceptar" CssClass="btn btn-primary" OnClick="txtAceptar_Click"/>
+                <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" CssClass="btn btn-primary" OnClick="btnAceptar_Click" />
+                <%if (Request.QueryString["id"] != null)
+                    {  %>
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-danger" OnClick="btnEliminar_Click" />
+                <%}%>
                 <a href="GestionArticulos.aspx">Cancelar</a>
+                <div class="mb-3">
+                    <%if (confirmaEliminar)
+                        {  %>
+                    <asp:Label ID="lblConfirmarEliminar" runat="server" Text="Confirmar Eliminación" CssClass="form-label"></asp:Label>
+                    <asp:CheckBox ID="ckbConfirmaEliminar" runat="server" />
+                    <asp:Button ID="btnConfirmaEliminar" runat="server" Text="Eliminar" CssClass="btn btn-outline-danger" OnClick="btnConfirmaEliminar_Click" />
+                    <%} %>
+                </div>
             </div>
             <div class="col">
                 <div class="mb-3">

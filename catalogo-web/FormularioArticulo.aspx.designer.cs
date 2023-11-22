@@ -60,13 +60,49 @@ namespace catalogo_web
         protected global::System.Web.UI.WebControls.DropDownList ddlMarca;
 
         /// <summary>
-        /// txtAceptar control.
+        /// btnAceptar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button txtAceptar;
+        protected global::System.Web.UI.WebControls.Button btnAceptar;
+
+        /// <summary>
+        /// btnEliminar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminar;
+
+        /// <summary>
+        /// lblConfirmarEliminar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConfirmarEliminar;
+
+        /// <summary>
+        /// ckbConfirmaEliminar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ckbConfirmaEliminar;
+
+        /// <summary>
+        /// btnConfirmaEliminar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirmaEliminar;
 
         /// <summary>
         /// txtUrlImagen control.
