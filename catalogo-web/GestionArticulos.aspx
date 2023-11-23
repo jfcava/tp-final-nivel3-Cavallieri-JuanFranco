@@ -9,6 +9,16 @@
             <hr />
             <h1>Listado de Artículos</h1>
             <hr />
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="txtFiltro" class="form-label">Filtro</label>
+                        <asp:TextBox ID="txtFiltro" runat="server" CssClass="form-control" style="margin-bottom:20px"></asp:TextBox>
+                        <asp:Button Text="Buscar" runat="server" CssClass="btn btn-warning" ID="btnBuscar" OnClick="btnBuscar_Click" />
+                        <asp:Button Text="Limpiar" runat="server" CssClass="btn btn-secondary" ID="btnLimpiar" OnClick="btnLimpiar_Click" />
+                    </div>
+                </div>
+            </div>
             <asp:GridView runat="server" ID="gvArticulos" AutoGenerateColumns="false" DataKeyNames="Id" CssClass="table" OnSelectedIndexChanged="gvArticulos_SelectedIndexChanged">
                 <Columns>
                     <asp:BoundField HeaderText="Código" DataField="Codigo" />

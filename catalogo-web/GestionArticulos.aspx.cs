@@ -17,7 +17,9 @@ namespace catalogo_web
 
             try
             {
-                gvArticulos.DataSource = negocio.listar();
+                List<Articulo> listaArticulos = negocio.listar();
+                Session.Add("listaArticulos", listaArticulos);
+                gvArticulos.DataSource = Session["listaArticulos"];
                 gvArticulos.DataBind();
             }
             catch (Exception ex)
@@ -35,6 +37,18 @@ namespace catalogo_web
         {
             string id = gvArticulos.SelectedDataKey.Value.ToString();
             Response.Redirect("FormularioArticulo.aspx?id=" + id, false);
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtFiltro.Text = string.Empty;
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada = ((List<Articulo>)Session["listaArticulos"]).FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            gvArticulos.DataSource = listaFiltrada;
+            gvArticulos.DataBind();
         }
     }
 }
