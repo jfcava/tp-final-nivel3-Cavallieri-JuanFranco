@@ -101,7 +101,8 @@ namespace catalogo_web
             }
             catch (Exception ex)
             {
-                throw ex;
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
             }
         }
 
