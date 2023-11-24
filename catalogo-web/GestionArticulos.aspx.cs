@@ -13,7 +13,7 @@ namespace catalogo_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
+            ArticuloNegocio negocio = new ArticuloNegocio();            
 
             try
             {
@@ -49,6 +49,39 @@ namespace catalogo_web
             List<Articulo> listaFiltrada = ((List<Articulo>)Session["listaArticulos"]).FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
             gvArticulos.DataSource = listaFiltrada;
             gvArticulos.DataBind();
+        }
+
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlCriterio.Items.Clear();
+
+            if(ddlCampo.SelectedItem.ToString() == "Precio")
+            {
+                ddlCriterio.Items.Add("Mayor a");
+                ddlCriterio.Items.Add("Menor a");
+                ddlCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                ddlCriterio.Items.Add("Empieza con");                
+                ddlCriterio.Items.Add("Termina con");                
+                ddlCriterio.Items.Add("Contiene");
+            }
+        }
+
+        protected void ckbFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbFiltroAvanzado.Checked)
+            {
+                txtFiltro.Enabled = false;
+            }
+            else
+                txtFiltro.Enabled = true;
+        }
+
+        protected void btnBuscarAvanzado_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
