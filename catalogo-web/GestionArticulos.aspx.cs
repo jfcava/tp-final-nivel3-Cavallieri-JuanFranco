@@ -81,7 +81,19 @@ namespace catalogo_web
 
         protected void btnBuscarAvanzado_Click(object sender, EventArgs e)
         {
+            ArticuloNegocio negocio = new ArticuloNegocio();
 
+            try
+            {
+                List<Articulo> listaFiltrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
+                gvArticulos.DataSource = listaFiltrada;
+                gvArticulos.DataBind(); 
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }
