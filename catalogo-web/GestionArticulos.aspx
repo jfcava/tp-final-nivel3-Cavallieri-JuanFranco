@@ -7,8 +7,7 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="row">
-                <hr />
-                <h1>Listado de Artículos</h1>
+                <h1 style="margin-top:12px">Listado de Artículos</h1>
                 <hr />
 
                 <div class="col-6">

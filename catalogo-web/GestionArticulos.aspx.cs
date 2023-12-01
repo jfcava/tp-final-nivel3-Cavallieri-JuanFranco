@@ -13,18 +13,26 @@ namespace catalogo_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();            
+            if (Session["usuario"] != null && ((User)Session["usuario"]).Admin == true)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
 
-            try
-            {
-                List<Articulo> listaArticulos = negocio.listar();
-                Session.Add("listaArticulos", listaArticulos);
-                gvArticulos.DataSource = Session["listaArticulos"];
-                gvArticulos.DataBind();
+                try
+                {
+                    List<Articulo> listaArticulos = negocio.listar();
+                    Session.Add("listaArticulos", listaArticulos);
+                    gvArticulos.DataSource = Session["listaArticulos"];
+                    gvArticulos.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw ex;
+                Session.Add("error", "No tenes permiso de Admin para entrar aca");
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -55,7 +63,7 @@ namespace catalogo_web
         {
             ddlCriterio.Items.Clear();
 
-            if(ddlCampo.SelectedItem.ToString() == "Precio")
+            if (ddlCampo.SelectedItem.ToString() == "Precio")
             {
                 ddlCriterio.Items.Add("Mayor a");
                 ddlCriterio.Items.Add("Menor a");
@@ -63,8 +71,8 @@ namespace catalogo_web
             }
             else
             {
-                ddlCriterio.Items.Add("Empieza con");                
-                ddlCriterio.Items.Add("Termina con");                
+                ddlCriterio.Items.Add("Empieza con");
+                ddlCriterio.Items.Add("Termina con");
                 ddlCriterio.Items.Add("Contiene");
             }
         }
@@ -87,7 +95,7 @@ namespace catalogo_web
             {
                 List<Articulo> listaFiltrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
                 gvArticulos.DataSource = listaFiltrada;
-                gvArticulos.DataBind(); 
+                gvArticulos.DataBind();
             }
             catch (Exception ex)
             {

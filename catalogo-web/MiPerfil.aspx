@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
-        <h1>Mi Perfil</h1>
+        <h1 style="margin-top:12px">Mi Perfil</h1>
         <hr />
         <div class="col-6">
             <div class="mb-3">
@@ -23,7 +23,7 @@
                 <label class="form-label">Apellido</label>
                 <asp:TextBox runat="server" CssClass="form-control" ID="txtApellido" />
             </div>
-            <asp:Button Text="Guardar" runat="server" CssClass="btn btn-primary" />
+            <asp:Button Text="Guardar" runat="server" CssClass="btn btn-primary" ID="btnGuardar" OnClick="btnGuardar_Click" />
             <a href="./">Regresar</a>
         </div>
         <div class="col-6">

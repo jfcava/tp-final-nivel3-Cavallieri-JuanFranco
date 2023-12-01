@@ -11,8 +11,11 @@ namespace catalogo_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string error = Request.QueryString["error"];
-            lblError.Text = error;
+            if (Session["error"] != null)
+            {
+                string error = Session["error"].ToString();
+                lblError.Text = error;
+            }
         }
     }
 }

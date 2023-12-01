@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="col-md-4">
-        <h1>Registro de Usuario</h1>
+        <h1 style="margin-top:12px">Registro de Usuario</h1>
         <hr />
         <div class="mb-3">
             <label class="form-label">E-Mail</label>
