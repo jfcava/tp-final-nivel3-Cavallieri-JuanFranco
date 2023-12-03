@@ -27,7 +27,12 @@ namespace catalogo_web
                 nuevo.Pass = txtPassword.Text;
 
                 negocio.insertarNuevo(nuevo);
-                Response.Redirect("MiPerfil.aspx", false);
+
+                if (negocio.Login(nuevo))
+                {
+                    Session.Add("usuario", nuevo);
+                    Response.Redirect("MiPerfil.aspx", false);
+                }
 
             }
             catch (Exception ex)

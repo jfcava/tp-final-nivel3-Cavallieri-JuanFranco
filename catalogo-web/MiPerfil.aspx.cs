@@ -50,6 +50,9 @@ namespace catalogo_web
                 }
 
                 negocio.actualizar(userActualizado);
+
+                Image img = (Image)Master.FindControl("imgAvatar");
+                img.ImageUrl = "~/Images/" + userActualizado.UrlImagenPerfil;
             }
             catch (Exception ex)
             {

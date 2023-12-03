@@ -13,7 +13,7 @@ namespace catalogo_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] != null && ((User)Session["usuario"]).Admin == true)
+            if (Seguridad.esAdmin(Session["usuario"]))
             {
                 ArticuloNegocio negocio = new ArticuloNegocio();
 

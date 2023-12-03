@@ -8,8 +8,6 @@ using dominio;
 
 namespace negocio
 {
-    //Genero una clase estatica para no tener que generar una instancia
-    //para usarla
     public static class Seguridad
     {
         public static bool sesionActiva(object user)

@@ -29,5 +29,22 @@ namespace catalogo_web
             string id = ((Button)sender).CommandArgument;
             Response.Redirect("FormularioArticulo.aspx?id=" + id, false);
         }
+
+        protected void btnAgregarFavorito_Click(object sender, EventArgs e)
+        {
+            int idArticulo = int.Parse(((Button)sender).CommandArgument);
+            int idUser = ((User)Session["usuario"]).Id;
+            FavoritoNegocio negocio = new FavoritoNegocio();
+
+            try
+            {
+                negocio.agregarFavorito(idUser, idArticulo);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
     }
 }
