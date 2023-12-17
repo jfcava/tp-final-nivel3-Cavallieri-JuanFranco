@@ -30,20 +30,26 @@ namespace negocio
             }
         }
 
-        public List<int> listarFavoritos(int id)
+        public List<Articulo> listarFavoritos(int id)
         {
             AccesoDatos datos = new AccesoDatos();
-            List<int> listaFiltrada = new List<int>();
+            List<Articulo> listaFiltrada = new List<Articulo>();
 
             try
             {
-                datos.setearConsulta("select IdArticulo from FAVORITOS where IdUser=@idUser");
+                datos.setearConsulta("select A.Id, Nombre, Descripcion, ImagenUrl from ARTICULOS A INNER JOIN FAVORITOS F ON F.IdUser = @idUser AND F.IdArticulo = A.Id");
                 datos.setearParametros("@idUser", id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    listaFiltrada.Add((int)datos.Lector["IdArticulo"]);
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    listaFiltrada.Add(aux);
                 }
 
                 return listaFiltrada;
@@ -51,6 +57,27 @@ namespace negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void quitarFavorito(int idArticulo, int idUser)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("delete from favoritos where idUser = @idUsuario AND IdArticulo = @idArt");
+                datos.setearParametros("@idUsuario", idUser);
+                datos.setearParametros("@idArt", idArticulo);
+                datos.ejecutarEscritura();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

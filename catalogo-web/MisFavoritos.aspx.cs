@@ -17,21 +17,39 @@ namespace catalogo_web
 
             try
             {
-                if (Seguridad.sesionActiva(Session["usuario"]))
+                if (!IsPostBack)
                 {
-                    User usuario = (User)Session["usuario"];
-                    List<int> idArticulos = negocio.listarFavoritos(usuario.Id);
-                    ArticuloNegocio artNegocio = new ArticuloNegocio();
-
-                    foreach (int id in idArticulos)
+                    if (Seguridad.sesionActiva(Session["usuario"]))
                     {
-                        artNegocio.listar(id.ToString());
+                        User usuario = (User)Session["usuario"];
+                        List<Articulo> listaFav = negocio.listarFavoritos(usuario.Id);
+
+                        repFavoritos.DataSource = listaFav;
+                        repFavoritos.DataBind();
                     }
                 }
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void btnQuitarFavorito_Click(object sender, EventArgs e)
+        {
+            FavoritoNegocio negocio = new FavoritoNegocio();
+            int idArticulo = int.Parse(((Button)sender).CommandArgument);
+            int idUser = ((User)Session["usuario"]).Id;
+
+            try
+            {
+                negocio.quitarFavorito(idArticulo, idUser);
+                Response.Redirect("MisFavoritos.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
 

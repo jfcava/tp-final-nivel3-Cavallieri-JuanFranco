@@ -17,7 +17,7 @@
                             <asp:Button Text="Ver Detalle" ID="Button1" runat="server" CssClass="btn btn-primary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" />
                             <%if (negocio.Seguridad.sesionActiva(Session["usuario"]))
                                 {  %>
-                            <asp:Button Text="Quitar" ID="btnQuitarFavorito" runat="server" CssClass="btn btn-secondary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" />
+                            <asp:Button Text="Quitar" ID="btnQuitarFavorito" runat="server" CssClass="btn btn-secondary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" OnClick="btnQuitarFavorito_Click" />
                             <%} %>
                         </div>
                     </div>
