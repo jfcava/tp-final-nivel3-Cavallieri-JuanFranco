@@ -30,6 +30,7 @@ namespace negocio
             }
         }
 
+
         public List<Articulo> listarFavoritos(int id)
         {
             AccesoDatos datos = new AccesoDatos();

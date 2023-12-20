@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
 using dominio;
+using System.Web.Services.Description;
 
 namespace catalogo_web
 {
@@ -35,9 +36,19 @@ namespace catalogo_web
             int idArticulo = int.Parse(((Button)sender).CommandArgument);
             int idUser = ((User)Session["usuario"]).Id;
             FavoritoNegocio negocio = new FavoritoNegocio();
+            List<Articulo> listaFavoritos = negocio.listarFavoritos(idUser);
 
             try
             {
+                foreach (Articulo art in listaFavoritos)
+                {
+                    if(art.Id == idArticulo)
+                    {
+                        Response.Write("<script>alert('El artículo ya fue agregado');</script>");
+                        return;
+                    }
+                        
+                }
                 negocio.agregarFavorito(idUser, idArticulo);
             }
             catch (Exception ex)

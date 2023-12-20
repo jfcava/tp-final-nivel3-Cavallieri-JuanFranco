@@ -9,6 +9,8 @@
         <div class="mb-3">
             <label class="form-label">E-Mail</label>
             <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" />
+            <asp:RequiredFieldValidator ErrorMessage="Debes completar este campo" ControlToValidate="txtEmail" runat="server" />
+            <asp:RegularExpressionValidator ErrorMessage="Debes ingresar un e-mail" ControlToValidate="txtEmail" runat="server" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" />
         </div>
         <div class="mb-3">
             <label class="form-label">Password</label>

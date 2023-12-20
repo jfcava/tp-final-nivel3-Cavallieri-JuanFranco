@@ -21,7 +21,7 @@ namespace catalogo_web
 
                     txtApellido.Text = usuario.Apellido;
                     txtEmail.Text = usuario.Email;
-                    txtEmail.ReadOnly = true;
+                    txtEmail.Enabled = false;
                     txtNombre.Text = usuario.Nombre;
                     txtPassword.Text = usuario.Pass;
                     if (!string.IsNullOrEmpty(usuario.UrlImagenPerfil))

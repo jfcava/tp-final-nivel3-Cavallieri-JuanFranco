@@ -9,7 +9,7 @@
     <div class="row">
             <asp:Repeater ID="repRepetidor" runat="server">
                 <itemtemplate>
-                    <div class="col-lg-3 col-sm-6 col-md-4">
+                    <div class="col-lg-3 col-sm-6 col-md-4" style="margin-top:20px">
                         <div class="card h-100">
                             <img src="<%#Eval("ImagenUrl") %>" class="card-img-top" alt="..." style="height:300px; object-fit:contain">
                             <div class="card-body">

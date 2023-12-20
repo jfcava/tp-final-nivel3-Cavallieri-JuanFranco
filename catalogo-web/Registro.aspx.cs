@@ -18,6 +18,10 @@ namespace catalogo_web
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
+
             User nuevo = new User();
             UserNegocio negocio = new UserNegocio();
 

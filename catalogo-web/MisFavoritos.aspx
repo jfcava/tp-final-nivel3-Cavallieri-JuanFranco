@@ -8,7 +8,7 @@
     <div class="row">
         <asp:Repeater ID="repFavoritos" runat="server">
             <ItemTemplate>
-                <div class="col-lg-3 col-sm-6 col-md-4">
+                <div class="col-lg-3 col-sm-6 col-md-4" style="margin-top:20px">
                     <div class="card h-100">
                         <img src="<%#Eval("ImagenUrl") %>" class="card-img-top" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/310px-Placeholder_view_vector.svg.png" style="height:300px; object-fit:contain">
                         <div class="card-body">
