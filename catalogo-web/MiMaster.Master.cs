@@ -15,7 +15,7 @@ namespace catalogo_web
         {
             imgAvatar.ImageUrl = "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg";
 
-            if (!(Page is Default || Page is Login || Page is Error || Page is Registro))
+            if (!(Page is Default || Page is Login || Page is Error || Page is Registro || Page is DetalleArticulo))
             {
                 if (!Seguridad.sesionActiva(Session["usuario"]))
                 {

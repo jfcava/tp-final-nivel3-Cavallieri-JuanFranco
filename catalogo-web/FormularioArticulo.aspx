@@ -7,16 +7,24 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <%if (Request.QueryString["id"] == null)
+                <%if (Request.QueryString["id"] == null && negocio.Seguridad.sesionActiva(Session["usuario"]))
                     {
 
                 %>
                 <h1 style="padding-top: 20px">Agregar Artículo</h1>
                 <%}
-                    else
-                    {  %>
+                    else if (negocio.Seguridad.sesionActiva(Session["usuario"]))
+                    {
+
+                %>
                 <h1 style="padding-top: 20px">Modificar Artículo</h1>
-                <%}%>
+                <%}
+                    else if(Request.QueryString["id"] != null)
+                    { %>
+                <h1 style="padding-top: 20px">Detalle del artículo</h1>
+                <%}
+
+                %>
                 <hr />
             </div>
             <div class="col-2"></div>
@@ -44,6 +52,10 @@
                     <label class="form-label">Marca</label>
                     <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
+
+                <%if (negocio.Seguridad.sesionActiva(Session["usuario"]))
+                    { %>
+
                 <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" CssClass="btn btn-primary" OnClick="btnAceptar_Click" />
                 <%if (Request.QueryString["id"] != null)
                     {  %>
@@ -56,8 +68,15 @@
                     <asp:Label ID="lblConfirmarEliminar" runat="server" Text="Confirmar Eliminación" CssClass="form-label"></asp:Label>
                     <asp:CheckBox ID="ckbConfirmaEliminar" runat="server" />
                     <asp:Button ID="btnConfirmaEliminar" runat="server" Text="Eliminar" CssClass="btn btn-outline-danger" OnClick="btnConfirmaEliminar_Click" />
-                    <%} %>
+                    <%}
+
+                    %>
                 </div>
+                <%}
+                    else
+                    {  %>
+                <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-primary" onclick="btnRegresar_Click" />
+                <%} %>
             </div>
             <div class="col">
                 <div class="mb-3">

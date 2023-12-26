@@ -15,6 +15,13 @@ namespace catalogo_web
         protected void Page_Load(object sender, EventArgs e)
         {
             confirmaEliminar = false;
+
+            if (Request.QueryString["id"] == null && !Seguridad.sesionActiva(Session["usuario"]))
+            {
+                Session.Add("error", "No estas logueado");
+                Response.Redirect("Error.aspx", false);
+            }
+
             try
             {
                 if (!IsPostBack)
@@ -129,6 +136,11 @@ namespace catalogo_web
                     Response.Redirect("Error.aspx", false);
                 }
             }
+        }
+
+        protected void btnRegresar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx", false);
         }
     }
 }

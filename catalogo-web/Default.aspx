@@ -4,7 +4,8 @@
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 style="margin-top: 12px">Hola!</h1>
+    <h1 style="margin-top: 12px">Bienvenidxs!</h1>
+    <h5>Te presentamos los nuevos artículos que tenemos para vos!</h5>
     <hr />
     <div class="row">
             <asp:Repeater ID="repRepetidor" runat="server">
