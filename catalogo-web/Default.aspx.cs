@@ -11,6 +11,7 @@ using System.Web.Services.Description;
 
 namespace catalogo_web
 {
+
     public partial class Default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -38,16 +39,17 @@ namespace catalogo_web
             FavoritoNegocio negocio = new FavoritoNegocio();
             List<Articulo> listaFavoritos = negocio.listarFavoritos(idUser);
 
+
             try
             {
                 foreach (Articulo art in listaFavoritos)
                 {
-                    if(art.Id == idArticulo)
+                    if (art.Id == idArticulo)
                     {
                         Response.Write("<script>alert('El artículo ya fue agregado');</script>");
                         return;
                     }
-                        
+
                 }
                 negocio.agregarFavorito(idUser, idArticulo);
             }
@@ -56,6 +58,6 @@ namespace catalogo_web
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx", false);
             }
-        }
+        }        
     }
 }
