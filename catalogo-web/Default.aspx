@@ -15,9 +15,21 @@
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
                             <p class="card-text"><%#Eval("Descripcion") %></p>
-                            <asp:Button Text="Ver Detalle" ID="Button1" runat="server" CssClass="btn btn-primary" OnClick="btnVerDetalle_Click" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" />
-                            <% if (negocio.Seguridad.sesionActiva(Session["usuario"])) { %>
-                            <asp:Button Text="Favorito" ID="btnAgregarFavorito" runat="server" CssClass="btn btn-secondary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" OnClick="btnAgregarFavorito_Click" />
+                            <asp:Button Text="Ver Detalle" ID="btnVerDetalle" runat="server" CssClass="btn btn-primary" OnClick="btnVerDetalle_Click" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" />
+                            <% if (negocio.Seguridad.sesionActiva(Session["usuario"]))
+                                { %>
+                            <%--<asp:Button Text="Favorito" ID="btnAgregarFavorito" runat="server" CssClass="btn btn-secondary"
+                                CommandArgument='<%#Eval("Id")%>' CommandName="ArtId"
+                                OnClick="btnAgregarFavorito_Click" Visible='<%# MostrarBotonFavorito(Eval("Id")) %>'>
+                            <i class="bi-alarm"></i></asp:Button>--%>
+
+                            <asp:LinkButton ID="btnAgregarFavorito" runat="server" CssClass="btn btn-secondary"
+                                CommandArgument='<%# Eval("Id") %>' CommandName="ArtId"
+                                OnClick="btnAgregarFavorito_Click" Visible='<%# MostrarBotonFavorito(Eval("Id")) %>'>
+                            <i class="bi bi-star" style="margin-bottom:20px;"></i> Favorito
+                            </asp:LinkButton>
+
+
                             <% }%>
                         </div>
                     </div>

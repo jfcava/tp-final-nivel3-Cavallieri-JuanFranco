@@ -52,8 +52,12 @@ namespace catalogo_web
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
+        }
 
-
+        protected void btnVerDetalle_Click(object sender, EventArgs e)
+        {
+            string id = ((Button)sender).CommandArgument;
+            Response.Redirect("FormularioArticulo.aspx?id=" + id, false);
         }
     }
 }

@@ -13,7 +13,7 @@
                 %>
                 <h1 style="padding-top: 20px">Agregar Artículo</h1>
                 <%}
-                    else if (negocio.Seguridad.sesionActiva(Session["usuario"]))
+                    else if (negocio.Seguridad.sesionActiva(Session["usuario"]) && negocio.Seguridad.esAdmin(Session["usuario"]))
                     {
 
                 %>
@@ -53,7 +53,7 @@
                     <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
 
-                <%if (negocio.Seguridad.sesionActiva(Session["usuario"]))
+                <%if (negocio.Seguridad.sesionActiva(Session["usuario"]) && negocio.Seguridad.esAdmin(Session["usuario"]))
                     { %>
 
                 <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" CssClass="btn btn-primary" OnClick="btnAceptar_Click" />

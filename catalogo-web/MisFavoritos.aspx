@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
                             <p class="card-text"><%#Eval("Descripcion") %></p>
-                            <asp:Button Text="Ver Detalle" ID="Button1" runat="server" CssClass="btn btn-primary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" />
+                            <asp:Button Text="Ver Detalle" ID="btnVerDetalle" runat="server" OnClick="btnVerDetalle_Click" CssClass="btn btn-primary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" />
                             <%if (negocio.Seguridad.sesionActiva(Session["usuario"]))
                                 {  %>
                             <asp:Button Text="Quitar" ID="btnQuitarFavorito" runat="server" CssClass="btn btn-secondary" CommandArgument='<%#Eval("Id")%>' CommandName="ArtId" OnClick="btnQuitarFavorito_Click" />
